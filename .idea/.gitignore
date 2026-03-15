@@ -1,0 +1,6 @@
+# Node modules
+node_modules/
+
+# Default ignored files
+/shelf/
+/workspace.xml
