@@ -19,15 +19,19 @@ export default function BottomTabs() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#1D9E75', // Accent Green
-        tabBarInactiveTintColor: isDark ? '#64748B' : '#94A3B8', // Slate 500 / Slate 400
+        tabBarActiveTintColor: '#FF131D',
+        tabBarInactiveTintColor: isDark ? '#64748B' : '#94A3B8',
         tabBarStyle: {
-          backgroundColor: isDark ? '#1E293B' : '#ffffff', // Slate 800 / White
+          backgroundColor: isDark ? '#1E293B' : '#ffffff',
           borderTopWidth: 1,
-          borderTopColor: isDark ? '#334155' : '#f1f5f9', // Slate 700 / Slate 100
+          borderTopColor: isDark ? '#334155' : '#E2E8F0',
           paddingBottom: 5,
           paddingTop: 5,
           height: 60,
+        },
+        tabBarLabelStyle: {
+          fontSize: 11,
+          fontWeight: '600',
         },
       }}
     >

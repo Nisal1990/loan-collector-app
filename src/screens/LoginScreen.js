@@ -33,10 +33,10 @@ export default function LoginScreen() {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      className="flex-1 bg-primary justify-center px-6"
+      className="flex-1 bg-dark justify-center px-6"
     >
       <View className="items-center mb-10">
-        <View className="w-24 h-24 bg-white rounded-full items-center justify-center mb-4">
+        <View className="w-24 h-24 bg-white rounded-full items-center justify-center mb-4 shadow-lg">
           <Image
             source={require('../../assets/images/logo.png')}
             className="w-20 h-20"
@@ -45,27 +45,30 @@ export default function LoginScreen() {
         </View>
 
         <Text className="text-3xl font-bold text-white mb-2">Kijen Global</Text>
-        <Text className="text-gray-300 text-center">
+        <Text className="text-slate-400 text-center">
           Microfinance Field Operations
         </Text>
       </View>
 
       <Card className="p-6">
-        <Text className="text-xl font-bold text-primary mb-6 text-center">
+        <Text className="text-xl font-bold text-dark dark:text-white mb-6 text-center">
           Collector Login
         </Text>
 
         {error ? (
-          <Text className="text-danger text-center mb-4">{error}</Text>
+          <View className="bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-lg p-3 mb-4">
+            <Text className="text-red-600 dark:text-red-400 text-center text-sm font-medium">{error}</Text>
+          </View>
         ) : null}
 
         <View className="mb-4">
-          <Text className="text-gray-600 font-semibold mb-2">Employee ID</Text>
-          <View className="flex-row items-center bg-gray-50 border border-gray-200 rounded-xl px-4 py-3">
+          <Text className="text-slate-600 dark:text-slate-400 font-semibold mb-2">Employee ID</Text>
+          <View className="flex-row items-center bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl px-4 py-3">
             <UserRound color="#94A3B8" size={20} />
             <TextInput
-              className="flex-1 ml-3 text-base text-gray-800"
+              className="flex-1 ml-3 text-base text-slate-800 dark:text-white"
               placeholder="e.g. E-1045"
+              placeholderTextColor="#94A3B8"
               autoCapitalize="none"
               value={employeeId}
               onChangeText={setEmployeeId}
@@ -74,12 +77,13 @@ export default function LoginScreen() {
         </View>
 
         <View className="mb-6">
-          <Text className="text-gray-600 font-semibold mb-2">Password</Text>
-          <View className="flex-row items-center bg-gray-50 border border-gray-200 rounded-xl px-4 py-3">
+          <Text className="text-slate-600 dark:text-slate-400 font-semibold mb-2">Password</Text>
+          <View className="flex-row items-center bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl px-4 py-3">
             <KeyRound color="#94A3B8" size={20} />
             <TextInput
-              className="flex-1 ml-3 text-base text-gray-800"
+              className="flex-1 ml-3 text-base text-slate-800 dark:text-white"
               placeholder="••••••••"
+              placeholderTextColor="#94A3B8"
               secureTextEntry
               value={password}
               onChangeText={setPassword}
@@ -92,10 +96,11 @@ export default function LoginScreen() {
           onPress={handleLogin}
           loading={loading}
           className="w-full"
+          size="lg"
         />
       </Card>
 
-      <Text className="text-gray-400 text-center mt-10 text-sm">
+      <Text className="text-slate-500 text-center mt-10 text-sm">
         Kijen Global @2026. All Rights Reserved. Developed By – Team Lily
       </Text>
     </KeyboardAvoidingView>

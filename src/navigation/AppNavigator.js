@@ -6,7 +6,6 @@ import { useColorScheme } from 'nativewind';
 import BottomTabs from './BottomTabs';
 import { AuthContext } from '../context/AuthContext';
 
-// Screens will be created in later steps. Providing placeholders for now
 import LoginScreen from '../screens/LoginScreen';
 import BorrowerProfileScreen from '../screens/BorrowerProfileScreen';
 import LoanPaymentScreen from '../screens/LoanPaymentScreen';
@@ -20,15 +19,15 @@ export default function AppNavigator() {
 
   if (loading) {
     return (
-      <View className="flex-1 items-center justify-center bg-primary dark:bg-slate-900">
-        <Text className="text-white">Loading...</Text>
+      <View className="flex-1 items-center justify-center bg-dark dark:bg-slate-900">
+        <Text className="text-white text-lg font-semibold">Loading...</Text>
       </View>
     );
   }
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, contentStyle: { backgroundColor: isDark ? '#0F172A' : '#F5F6FA' } }}>
+      <Stack.Navigator screenOptions={{ headerShown: false, contentStyle: { backgroundColor: isDark ? '#0F172A' : '#F8F8F8' } }}>
         {user ? (
           <>
             <Stack.Screen name="MainTabs" component={BottomTabs} />

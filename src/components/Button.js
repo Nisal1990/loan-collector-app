@@ -1,5 +1,5 @@
-import React from "react";
-import { TouchableOpacity, Text, ActivityIndicator } from "react-native";
+import React from 'react';
+import { TouchableOpacity, Text, ActivityIndicator } from 'react-native';
 
 export default function Button({ 
   title, 
@@ -16,11 +16,11 @@ export default function Button({
   
   const variants = {
     primary: "bg-primary",
-    secondary: "bg-gray-200 dark:bg-slate-700",
+    secondary: "bg-slate-200 dark:bg-slate-700",
     success: "bg-accent",
     warning: "bg-warning",
-    danger: "bg-danger",
-    outline: "bg-transparent border border-primary dark:border-slate-400",
+    danger: "bg-red-600 dark:bg-red-700",
+    outline: "bg-transparent border-2 border-slate-300 dark:border-slate-500",
   };
 
   const sizes = {
@@ -31,11 +31,11 @@ export default function Button({
 
   const textVariants = {
     primary: "text-white",
-    secondary: "text-gray-800 dark:text-gray-200",
+    secondary: "text-slate-800 dark:text-slate-200",
     success: "text-white",
     warning: "text-white",
     danger: "text-white",
-    outline: "text-primary dark:text-slate-300",
+    outline: "text-dark dark:text-slate-200",
   };
 
   const textSizes = {
@@ -54,7 +54,7 @@ export default function Button({
       className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${opacity} ${className}`}
     >
       {loading ? (
-        <ActivityIndicator color={variant === 'outline' || variant === 'secondary' ? '#1E2A4A' : '#ffffff'} size="small" />
+        <ActivityIndicator color={variant === 'outline' || variant === 'secondary' ? '#020E28' : '#ffffff'} size="small" />
       ) : (
         <>
           {icon && <React.Fragment>{icon}</React.Fragment>}

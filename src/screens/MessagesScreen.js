@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, SafeAreaView, FlatList, TouchableOpacity, Linking, Alert } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Linking, Alert } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useColorScheme } from 'nativewind';
 import { mockBorrowers } from '../utils/mockData';
 import { formatCurrency } from '../utils/currency';
@@ -52,8 +53,6 @@ export default function MessagesScreen() {
       [
         { text: "Cancel", style: "cancel" },
         { text: "Proceed", onPress: () => {
-          // In a real app with native modules, this would use a background loop.
-          // For Expo we just notify the user.
           Alert.alert("Bulk Send Started", "Messages queued in background.");
         }}
       ]
@@ -62,10 +61,10 @@ export default function MessagesScreen() {
 
   const renderCard = ({ item }) => (
     <Card className="mb-4">
-      <View className="flex-row justify-between items-start mb-3 border-b border-gray-100 dark:border-slate-700 pb-3">
+      <View className="flex-row justify-between items-start mb-3 border-b border-slate-100 dark:border-slate-700 pb-3">
         <View className="flex-1">
-          <Text className="text-base font-bold text-primary dark:text-white">{item.fullName}</Text>
-          <Text className="text-gray-500 dark:text-gray-400 text-xs">A/C: {item.loanAccountNo}</Text>
+          <Text className="text-base font-bold text-dark dark:text-white">{item.fullName}</Text>
+          <Text className="text-slate-500 dark:text-slate-400 text-xs">A/C: {item.loanAccountNo}</Text>
         </View>
         <Badge 
           label={item.arrearsAmount > 0 ? "Overdue" : "Pending"} 
@@ -73,14 +72,14 @@ export default function MessagesScreen() {
         />
       </View>
 
-      <Text className="text-gray-600 dark:text-gray-300 text-xs bg-blue-50 dark:bg-slate-700/50 p-2 rounded-lg mb-3">
+      <Text className="text-slate-600 dark:text-slate-300 text-xs bg-slate-50 dark:bg-slate-700/50 p-2 rounded-lg mb-3">
         {getMessageTemplate(item)}
       </Text>
 
       <View className="flex-row justify-end space-x-2">
         <TouchableOpacity 
           onPress={() => handleSendSMS(item)}
-          className="flex-row items-center bg-gray-100 dark:bg-slate-700 px-3 py-2 rounded-lg mr-2"
+          className="flex-row items-center bg-slate-100 dark:bg-slate-700 px-3 py-2 rounded-lg mr-2"
         >
           <MessageSquare color={isDark ? "#CBD5E1" : "#475569"} size={16} />
           <Text className="text-slate-600 dark:text-slate-300 text-xs font-bold ml-2">SMS</Text>
@@ -88,10 +87,10 @@ export default function MessagesScreen() {
         
         <TouchableOpacity 
           onPress={() => handleSendWhatsApp(item)}
-          className="flex-row items-center bg-green-50 dark:bg-green-900/40 border border-green-200 dark:border-green-800 px-3 py-2 rounded-lg"
+          className="flex-row items-center bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 px-3 py-2 rounded-lg"
         >
-          <MessageCircle color={isDark ? "#4ADE80" : "#16a34a"} size={16} />
-          <Text className="text-green-600 dark:text-green-400 text-xs font-bold ml-2">WhatsApp</Text>
+          <MessageCircle color={isDark ? "#34D399" : "#16a34a"} size={16} />
+          <Text className="text-emerald-600 dark:text-emerald-400 text-xs font-bold ml-2">WhatsApp</Text>
         </TouchableOpacity>
       </View>
     </Card>
@@ -99,34 +98,34 @@ export default function MessagesScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-background dark:bg-slate-900">
-      <View className="px-4 py-4 bg-white dark:bg-slate-800 border-b border-gray-100 dark:border-slate-700">
-        <Text className="text-2xl font-bold text-primary dark:text-white mb-4">Messages & Reminders</Text>
+      <View className="px-4 py-4 bg-white dark:bg-slate-800 border-b border-slate-100 dark:border-slate-700">
+        <Text className="text-2xl font-bold text-dark dark:text-white mb-4">Messages & Reminders</Text>
 
         {/* Template Language Toggle */}
         <View className="flex-row items-center mb-4">
-          <Text className="text-gray-500 dark:text-gray-400 font-semibold mr-3 text-sm">Template:</Text>
-          <View className="flex-row bg-gray-100 dark:bg-slate-700 rounded-lg p-1">
+          <Text className="text-slate-500 dark:text-slate-400 font-semibold mr-3 text-sm">Template:</Text>
+          <View className="flex-row bg-slate-100 dark:bg-slate-700 rounded-lg p-1">
             {languages.map(lang => (
               <TouchableOpacity
                 key={lang}
                 onPress={() => setActiveLang(lang)}
                 className={`py-1 px-4 rounded-md ${activeLang === lang ? 'bg-white dark:bg-slate-600 shadow-sm' : 'bg-transparent'}`}
               >
-                <Text className={`text-xs font-semibold ${activeLang === lang ? 'text-primary dark:text-white' : 'text-gray-500 dark:text-gray-400'}`}>{lang}</Text>
+                <Text className={`text-xs font-semibold ${activeLang === lang ? 'text-dark dark:text-white' : 'text-slate-500 dark:text-slate-400'}`}>{lang}</Text>
               </TouchableOpacity>
             ))}
           </View>
         </View>
 
         {/* Filter Tabs */}
-        <View className="flex-row mb-1 border border-gray-200 dark:border-slate-700 rounded-xl overflow-hidden bg-gray-50 dark:bg-slate-800">
+        <View className="flex-row mb-1 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden bg-slate-50 dark:bg-slate-800">
           {filters.map(f => (
             <TouchableOpacity 
               key={f} 
               onPress={() => setFilter(f)}
-              className={`flex-1 py-3 items-center ${filter === f ? 'bg-primary dark:bg-slate-600 border-r border-primary dark:border-slate-600' : 'border-r border-gray-200 dark:border-slate-700'}`}
+              className={`flex-1 py-3 items-center ${filter === f ? 'bg-primary border-r border-primary' : 'border-r border-slate-200 dark:border-slate-700'}`}
             >
-              <Text className={filter === f ? 'text-white font-semibold text-xs' : 'text-gray-600 dark:text-gray-400 font-semibold text-xs'}>
+              <Text className={filter === f ? 'text-white font-semibold text-xs' : 'text-slate-600 dark:text-slate-400 font-semibold text-xs'}>
                 {f}
               </Text>
             </TouchableOpacity>
@@ -143,8 +142,8 @@ export default function MessagesScreen() {
         ListEmptyComponent={
           <View className="items-center justify-center p-10">
             <CheckCheck color="#CBD5E1" size={48} className="mb-4" />
-            <Text className="text-gray-400 dark:text-gray-500 text-center text-lg font-semibold">All clear!</Text>
-            <Text className="text-gray-400 dark:text-gray-500 text-center text-sm">No borrowers need reminders right now.</Text>
+            <Text className="text-slate-400 dark:text-slate-500 text-center text-lg font-semibold">All clear!</Text>
+            <Text className="text-slate-400 dark:text-slate-500 text-center text-sm">No borrowers need reminders right now.</Text>
           </View>
         }
       />
@@ -154,7 +153,7 @@ export default function MessagesScreen() {
         <View className="absolute bottom-6 left-0 right-0 px-4 items-center">
           <TouchableOpacity 
             onPress={handleBulkSend}
-            className="flex-row items-center bg-primary dark:bg-slate-700 border dark:border-slate-600 px-6 py-4 rounded-full shadow-sm"
+            className="flex-row items-center bg-primary dark:bg-primary px-6 py-4 rounded-full shadow-lg"
           >
             <MessageCircle color="white" size={20} />
             <Text className="text-white font-bold text-base ml-2">Bulk Send to {filteredBorrowers.length} Pending</Text>
