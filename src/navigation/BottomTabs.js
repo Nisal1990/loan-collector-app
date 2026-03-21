@@ -1,7 +1,9 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Home, Users, Wallet, MessageSquare, User } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import DashboardScreen from '../screens/DashboardScreen';
 import BorrowersListScreen from '../screens/BorrowersListScreen';
@@ -14,6 +16,10 @@ const Tab = createBottomTabNavigator();
 export default function BottomTabs() {
   const { colorScheme } = useColorScheme();
   const isDark = colorScheme === 'dark';
+  const insets = useSafeAreaInsets();
+
+  // Ensure minimum padding even if insets.bottom is 0 (e.g. devices with hardware buttons)
+  const bottomPadding = Math.max(insets.bottom, 5);
 
   return (
     <Tab.Navigator
@@ -25,9 +31,9 @@ export default function BottomTabs() {
           backgroundColor: isDark ? '#1E293B' : '#ffffff',
           borderTopWidth: 1,
           borderTopColor: isDark ? '#334155' : '#E2E8F0',
-          paddingBottom: 5,
+          paddingBottom: bottomPadding,
           paddingTop: 5,
-          height: 60,
+          height: 60 + bottomPadding,
         },
         tabBarLabelStyle: {
           fontSize: 11,
